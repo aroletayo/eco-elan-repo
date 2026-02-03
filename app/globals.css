@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 45% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 45% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 45% 15%;
+
+    --primary: 220 45% 20%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 15% 96%;
+    --secondary-foreground: 220 45% 20%;
+
+    --muted: 210 15% 96%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 100 35% 22%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 100 35% 22%;
+
+    --radius: 0.75rem;
+
+    /* Custom Eco Elan Colors */
+    --eco-green: 100 35% 22%;
+    --eco-green-light: rgb(130, 167, 49);
+    --eco-green-dark: 100 35% 18%;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(220 45% 20% / 0.06);
+    --shadow-md: 0 4px 20px hsl(220 45% 20% / 0.08);
+    --shadow-lg: 0 8px 40px hsl(220 45% 20% / 0.12);
+    --shadow-glow: 0 0 30px hsl(100 35% 22% / 0.2);
+
+    /* Typography */
+    --font-display: "Inter", sans-serif;
+    --font-body: "Inter", sans-serif;
+  }
+
+  .dark {
+    --background: 220 45% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 45% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 45% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 152 55% 45%;
+    --primary-foreground: 220 45% 10%;
+
+    --secondary: 220 35% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 35% 18%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 100 35% 25%;
+    --accent-foreground: 220 45% 10%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 35% 22%;
+    --input: 220 35% 22%;
+    --ring: 100 35% 25%;
+
+    --eco-green: 100 35% 25%;
+    --eco-green-light: 152 30% 18%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-semibold;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24 px-4 md:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-eco-green to-eco-green-dark;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-draw-line {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: drawLine 1.5s ease-out forwards;
+    animation-delay: 0.8s;
+  }
+
+  .animate-zoom-out-5s {
+    animation: zoom-out-5s 7s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes drawLine {
+    from {
+      stroke-dashoffset: 200;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes zoom-out-5s {
+    from {
+      transform: scale(1.3);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+}
