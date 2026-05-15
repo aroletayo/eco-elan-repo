@@ -1,489 +1,502 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Leaf,
-  Sparkles,
-  Shield,
-  Clock,
-  Star,
-  ArrowRight,
-  Building2,
-  Home,
-  Plane,
-  ThumbsUp,
-} from "lucide-react";
-import {
-  FadeIn,
-  StaggerContainer,
-  HoverScale,
-  AnimatedCounter,
-  PageTransition,
-} from "@/components/animations";
 import { motion } from "framer-motion";
-import { staggerItem } from "@/components/animations";
-import HeroCarousel from "@/components/HeroCarousel";
-import ServiceSection from "@/components/layout/ServiceSection";
-import { useContent } from "@/hooks/use-content";
-import PageLoader from "@/components/PageLoader";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  CalendarCheck,
+  Check,
+  Home,
+  Leaf,
+  MessageCircle,
+  ShieldCheck,
+  Sparkles,
+  SprayCan,
+  Star,
+  Trees,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-const cleaningLivingroom = "/assets/Ecoelan-herosection.webp";
-const teamPortrait = "/assets/Ecoelan-teams.webp";
-const happyFamily = "/assets/happy-family.webp";
-const ecoProducts = "/assets/Ecoelan-ourproduct.webp";
+import { BookingLeadForm } from "@/components/BookingLeadForm";
+import { Button } from "@/components/ui/button";
 
 const services = [
   {
-    icon: Sparkles,
-    title: "Standard Eco Cleaning",
-    description:
-      "A refreshing maintenance clean using eco-safe, plant-based products.",
-    price: "From $110",
-  },
-  {
-    icon: Leaf,
-    title: "Deep Eco Cleaning",
-    description:
-      "A full-detail, premium clean for seasonal resets or first-time clients.",
-    price: "From $200",
-  },
-  {
     icon: Home,
-    title: "Move-In/Move-Out",
-    description: "Complete top-to-bottom luxury clean for empty homes.",
-    price: "From $240",
+    name: "Regular House Cleaning",
+    description: "Consistent weekly, bi-weekly, or monthly eco home care.",
+    popular: true,
   },
   {
-    icon: Plane,
-    title: "Airbnb Turnover",
-    description: "Fast, consistent, toxin-free turnover service for hosts.",
-    price: "From $120",
+    icon: Sparkles,
+    name: "Deep Cleaning",
+    description: "Detailed reset cleans for kitchens, bathrooms, and buildup.",
+  },
+  {
+    icon: ShieldCheck,
+    name: "Move In / Move Out Cleaning",
+    description: "Top-to-bottom turnover cleaning before the next chapter.",
+  },
+  {
+    icon: Trees,
+    name: "Eco Lawn Care",
+    description: "Sustainable outdoor care that keeps your curb appeal clean.",
   },
   {
     icon: Building2,
-    title: "Office Cleaning",
-    description: "A healthier workspace with non-toxic, eco-friendly products.",
-    price: "From $50/hr",
+    name: "Commercial Cleaning",
+    description: "Healthier offices, clinics, retail, and shared workspaces.",
+  },
+  {
+    icon: SprayCan,
+    name: "Window Cleaning",
+    description: "Crystal-clear glass without harsh chemical residue.",
   },
 ];
 
 const features = [
   {
     icon: Leaf,
-    title: "100% Eco-Friendly",
-    description:
-      "Plant-based, biodegradable, non-toxic products safe for your family.",
+    title: "100% Non-Toxic Products",
+    text: "Safe for children, pets, and the planet. Every product we use is certified eco-friendly.",
   },
   {
-    icon: Shield,
-    title: "Insured & Vetted",
-    description: "Background-checked, professionally trained cleaning staff.",
+    icon: ShieldCheck,
+    title: "Trained & Trusted Team",
+    text: "Background-checked, insured professionals who treat your home like their own.",
   },
   {
-    icon: Clock,
+    icon: CalendarCheck,
     title: "Flexible Scheduling",
-    description: "Weekly, bi-weekly, monthly plans. Cancel anytime.",
+    text: "Book online in minutes. Same-day and weekend appointments available.",
   },
   {
-    icon: Star,
-    title: "Satisfaction Guarantee",
-    description: "We're not happy until you are. 100% satisfaction guaranteed.",
+    icon: BadgeCheck,
+    title: "Satisfaction Guaranteed",
+    text: "Not happy? We come back and make it right. No questions asked.",
+  },
+];
+
+const steps = [
+  {
+    title: "Book Online",
+    text: "Choose your service and preferred time. Takes under 2 minutes.",
+  },
+  {
+    title: "We Show Up",
+    text: "Our eco-certified team arrives on time with all supplies included.",
+  },
+  {
+    title: "Enjoy the Clean",
+    text: "Come home to a spotless, fresh-smelling space - guilt-free.",
+  },
+];
+
+const plans = [
+  {
+    name: "Basic",
+    cadence: "Bi-Weekly",
+    items: ["Standard cleaning", "Eco products included", "Same team every visit"],
+    cta: "Get Started",
+  },
+  {
+    name: "Popular",
+    cadence: "Weekly",
+    popular: true,
+    items: [
+      "Everything in Basic",
+      "Priority scheduling",
+      "Free window cleaning monthly",
+      "15% discount",
+    ],
+    cta: "Get Started",
+  },
+  {
+    name: "Premium",
+    cadence: "Custom Plan",
+    items: [
+      "Everything in Popular",
+      "Commercial available",
+      "Dedicated account manager",
+      "Custom schedule",
+    ],
+    cta: "Contact Us",
   },
 ];
 
 const testimonials = [
   {
-    name: "Amanda L.",
-    text: "The clean was amazing and I love that everything they use is eco-safe for my kids. Highly recommend Eco Elan!",
-    rating: 5,
+    text: "Eco Elan transformed our home. Everything smells fresh and clean without the harsh chemical smell. Our kids and dog love it.",
+    name: "Sarah M., Toronto ON",
   },
   {
-    name: "Ryan P.",
-    text: "Professional, friendly, and the place smelled fresh without chemicals. Perfect service.",
-    rating: 5,
+    text: "I've tried many cleaning services. Eco Elan is the only one that uses products I actually trust around my family.",
+    name: "James K., Mississauga ON",
   },
   {
-    name: "Sarah M.",
-    text: "Finally found a cleaning service that cares about the environment as much as I do. Top quality!",
-    rating: 5,
+    text: "Reliable, professional, and genuinely eco-friendly. Worth every penny. We've been subscribers for 8 months.",
+    name: "Linda T., Etobicoke ON",
   },
 ];
 
-export default function Index() {
-  const { content, loading } = useContent();
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0 },
+};
 
-  if (loading) {
-    return <PageLoader />;
-  }
-
+export default function HomePage() {
   return (
-    <PageTransition>
-      <div className="flex flex-col">
-        {/* Hero Carousel Section */}
-        <HeroCarousel content={content.hero} />
+    <div className="bg-[#f8f9f4]">
+      <section className="relative flex min-h-screen items-center overflow-hidden bg-[#081c15] px-4 pb-12 pt-28 text-white sm:px-6 lg:px-8">
+        <Image
+          src="/assets/hero-home.webp"
+          alt="Eco Elan premium eco cleaning"
+          fill
+          priority
+          className="object-cover opacity-28"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,28,21,0.98),rgba(8,28,21,0.82),rgba(8,28,21,0.28))]" />
 
-        {/* Services Section */}
-        <ServiceSection content={content.services} />
-
-        {/* Why Choose Us Section */}
-        <section className="section-padding">
-          <div className="container-custom">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <FadeIn direction="left">
-                <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6">
-                  Why Choose Us
-                </h2>
-                <span className="inline-block text-accent font-medium text-sm uppercase tracking-wider mb-4">
-                  Eco-Friendly Cleaning You Can Trust
-                </span>
-
-                <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                  At Eco Elan, we believe a clean environment should be healthy
-                  for your family and gentle on the planet. Our team is fully
-                  trained, background-checked, and committed to delivering
-                  exceptional results.
-                </p>
-
-                <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {features.map((feature) => (
-                    <motion.div
-                      key={feature.title}
-                      variants={staggerItem}
-                      className="flex gap-4"
-                    >
-                      <div className="w-12 h-12 rounded-lg bg-eco-green-light flex items-center justify-center shrink-0">
-                        <feature.icon className="w-6 h-6 text-accent" />
-                      </div>
-                      <div>
-                        <h4 className="font-display text-lg font-semibold text-primary mb-1">
-                          {feature.title}
-                        </h4>
-                        <p className="text-muted-foreground text-sm">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </StaggerContainer>
-              </FadeIn>
-
-              <FadeIn direction="right" delay={0.2} className="relative">
-                <HoverScale scale={1.02}>
-                  <div className="aspect-square rounded-3xl overflow-hidden shadow-eco-lg">
-                    <img
-                      src={cleaningLivingroom}
-                      alt="Clean eco-friendly home"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </HoverScale>
-                {/* Floating Stats Card */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
-                  className="absolute -bottom-8 -left-8 bg-card rounded-2xl p-6 shadow-eco-lg"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center">
-                      <Leaf className="w-8 h-8 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <p className="font-display text-3xl font-bold text-primary">
-                        <AnimatedCounter from={0} to={100} suffix="%" />
-                      </p>
-                      <p className="text-muted-foreground text-sm">
-                        Eco Products
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </FadeIn>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="section-padding bg-eco-green">
-          <div className="container-custom">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-                Testimonials
-              </h2>
-
-              <span className="inline-block text-gray-300 font-medium text-sm uppercase tracking-wider mb-4">
-                What Our Clients Say
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={testimonial.name}
-                  className={`bg-card rounded-2xl p-8 shadow-eco-sm opacity-0 animate-slide-up stagger-${
-                    index + 1
-                  }`}
-                  style={{ animationFillMode: "forwards" }}
-                >
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 fill-accent text-accent"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-foreground mb-6 leading-relaxed italic">
-                    "{testimonial.text}"
-                  </p>
-                  <p className="font-display text-lg font-semibold text-primary">
-                    — {testimonial.name}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-12">
-              <Button variant="outline" asChild>
-                <Link href="/contact">See More Reviews</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Service Areas */}
-        <section className="section-padding">
-          <div className="container-custom text-center">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6">
-              Service Areas
-            </h2>
-            <span className="inline-block text-accent font-medium text-sm uppercase tracking-wider mb-4">
-              Proudly Serving the GTA
-            </span>
-
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-8">
-              Toronto • Mississauga • Brampton • Etobicoke • North York •
-              Scarborough • Vaughan • Ajax • Oakville • Whitby • Pickering •
-              Oshawa • Burlington • Hamilton • Markham • New Market • Richmond
-              hill
-            </p>
-            <Button variant="accent" asChild>
-              <Link href="/area-check">
-                Check Your Area
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-          </div>
-        </section>
-
-        {/* Team Section */}
-        <section className="section-padding bg-secondary">
-          <div className="container-custom">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative">
-                <div className="rounded-3xl overflow-hidden shadow-eco-lg">
-                  <img
-                    src={teamPortrait}
-                    alt="Our professional cleaning team"
-                    className="w-full h-[500px] object-cover"
-                  />
-                </div>
-                {/* Floating Badge */}
-                <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground rounded-2xl p-6 shadow-eco-lg">
-                  <p className="font-display text-4xl font-bold">4+</p>
-                  <p className="text-sm opacity-90">Years Experience</p>
-                </div>
-              </div>
-              <div>
-                <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6">
-                  Meet Our Team
-                </h2>
-                <span className="inline-block text-accent font-medium text-sm uppercase tracking-wider mb-4">
-                  Professional, Trusted Cleaners
-                </span>
-
-                <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                  Our team is carefully selected, background-checked, and
-                  professionally trained to deliver exceptional cleaning
-                  results. We treat every home with the care and respect it
-                  deserves.
-                </p>
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-eco-green-light flex items-center justify-center">
-                      <Shield className="w-5 h-5 text-accent" />
-                    </div>
-                    <span className="text-foreground font-medium">
-                      Background Checked
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-eco-green-light flex items-center justify-center">
-                      <Star className="w-5 h-5 text-accent" />
-                    </div>
-                    <span className="text-foreground font-medium">
-                      Highly Rated
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-eco-green-light flex items-center justify-center">
-                      <ThumbsUp className="w-5 h-5 text-accent" />
-                    </div>
-                    <span className="text-foreground font-medium">
-                      Fully Insured
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-eco-green-light flex items-center justify-center">
-                      <Clock className="w-5 h-5 text-accent" />
-                    </div>
-                    <span className="text-foreground font-medium">
-                      Always On Time
-                    </span>
-                  </div>
-                </div>
-                <Button variant="accent" asChild>
-                  <Link href="/about">
-                    Learn More About Us
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Happy Customers Section */}
-        <section className="section-padding">
-          <div className="container-custom">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6">
-                  Safe for Your Family & Pets
-                </h2>
-                <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                  Our 100% plant-based, non-toxic products mean you never have
-                  to worry about harmful chemicals around your loved ones. Enjoy
-                  a spotless home that's truly safe for everyone.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Button variant="hero" size="lg" asChild>
-                    <Link href="/book">
-                      Book Your First Clean
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="order-1 lg:order-2 relative">
-                <div className="rounded-3xl overflow-hidden shadow-eco-lg">
-                  <img
-                    src={happyFamily}
-                    alt="Happy family in a clean home"
-                    className="w-full h-[500px] object-cover"
-                  />
-                </div>
-                {/* Floating Card */}
-                <div className="absolute -bottom-6 -left-6 bg-card rounded-2xl p-6 shadow-eco-lg border border-border">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Leaf className="w-8 h-8 text-accent" />
-                    <span className="font-display text-xl font-bold text-primary">
-                      100% Safe
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground text-sm">
-                    For kids, pets & allergies
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Products Section */}
-        <section className="section-padding bg-eco-green-light">
-          <div className="container-custom">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="relative rounded-3xl overflow-hidden group">
-                <img
-                  src={ecoProducts}
-                  alt="Eco-friendly cleaning products"
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <h2 className="font-display text-4xl font-bold text-primary mb-4">
-                  Our Products
-                </h2>
-                <span className="inline-block text-accent font-medium text-sm uppercase tracking-wider mb-4">
-                  Premium Eco-Friendly Products
-                </span>
-
-                <p className="text-muted-foreground text-lg mb-6">
-                  We exclusively use plant-based, biodegradable, and
-                  eco-certified cleaning products. No harsh chemicals, no
-                  toxins, no compromises.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center gap-3 text-foreground">
-                    <Leaf className="w-5 h-5 text-accent" />
-                    Plant-based & biodegradable
-                  </li>
-                  <li className="flex items-center gap-3 text-foreground">
-                    <Leaf className="w-5 h-5 text-accent" />
-                    Non-toxic & chemical-free
-                  </li>
-                  <li className="flex items-center gap-3 text-foreground">
-                    <Leaf className="w-5 h-5 text-accent" />
-                    Safe for sensitive skin
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="section-padding bg-primary relative overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-72 h-72 bg-accent rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
-          </div>
-          <div className="container-custom text-center relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Ready for a Cleaner, Greener Home?
-            </h2>
-            <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
-              Book your first eco-friendly clean today and experience the Eco
-              Elan difference.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.85fr]">
+          <motion.div
+            initial="hidden"
+            animate="show"
+            transition={{ staggerChildren: 0.12 }}
+            className="max-w-3xl"
+          >
+            <motion.div
+              variants={fadeUp}
+              className="mb-6 inline-flex rounded-full border border-[#74c69d]/35 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#74c69d] backdrop-blur"
+            >
+              Ontario's #1 Eco Cleaning Service
+            </motion.div>
+            <motion.h1
+              variants={fadeUp}
+              className="font-display text-6xl font-black italic leading-[0.94] tracking-normal sm:text-7xl lg:text-8xl"
+            >
+              A Cleaner Home.
+              <br />
+              A Healthier Planet.
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              className="mt-7 max-w-2xl text-lg leading-8 text-white/78"
+            >
+              Professional eco-friendly cleaning and lawn care services across
+              Ontario. Safe for your family, gentle on the earth.
+            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              className="mt-9 flex flex-col gap-4 sm:flex-row"
+            >
               <Button
-                variant="accent"
-                size="lg"
                 asChild
-                className="shadow-lg hover:shadow-xl transition-shadow"
+                className="h-14 rounded-full bg-[#2d6a4f] px-7 text-base font-bold text-white shadow-[0_0_34px_rgba(116,198,157,0.35)] hover:bg-[#245840]"
               >
                 <Link href="/book">
-                  Book Now
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                  Book Your First Clean <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
               <Button
-                variant="outline"
-                size="lg"
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
                 asChild
+                variant="outline"
+                className="h-14 rounded-full border-white/35 bg-white/5 px-7 text-base font-bold text-white hover:bg-white hover:text-[#081c15]"
               >
-                <Link href="/subscriptions">View Plans</Link>
+                <Link href="/services">View Our Services</Link>
               </Button>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm font-semibold text-white/75"
+            >
+              <span>4.9 Rating</span>
+              <span>500+ Happy Clients</span>
+              <span>100% Eco Products</span>
+              <span>Ontario CA</span>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              className="mt-5 inline-flex rounded-full bg-[#e9c46a] px-5 py-2 text-sm font-black text-[#081c15]"
+            >
+              Spring Special: 20% OFF First Service
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.7 }}
+            className="relative mx-auto w-full max-w-md"
+          >
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="rounded-lg border border-white/15 bg-white p-4 text-[#081c15] shadow-[0_30px_100px_rgba(0,0,0,0.32)]"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden rounded-md">
+                <Image
+                  src="/assets/cleaning-livingroom.webp"
+                  alt="Eco Elan service preview"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="mt-5 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2d6a4f]">
+                    Premium Home Reset
+                  </p>
+                  <p className="mt-1 font-display text-2xl font-bold">
+                    Non-toxic, hotel-level clean
+                  </p>
+                </div>
+                <Leaf className="h-10 w-10 text-[#2d6a4f]" />
+              </div>
+            </motion.div>
+            <StatCard className="-left-6 top-16" value="500+" label="clients served" />
+            <StatCard className="-right-4 top-1/2" value="100%" label="eco products" />
+            <StatCard className="bottom-10 left-8" value="4.9" label="rating" />
+          </motion.div>
+        </div>
+      </section>
+
+      <SectionIntro
+        label="Services"
+        title="Everything Your Home Needs, Naturally Clean"
+      />
+      <section className="px-4 pb-24 sm:px-6 lg:px-8">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ staggerChildren: 0.08 }}
+          className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {services.map((service) => (
+            <motion.article
+              variants={fadeUp}
+              key={service.name}
+              className="group rounded-lg border border-[#74c69d]/20 bg-[#081c15] p-7 text-white shadow-eco-md transition hover:-translate-y-1 hover:border-[#74c69d]/70 hover:shadow-[0_0_42px_rgba(116,198,157,0.22)]"
+            >
+              <div className="mb-7 flex items-center justify-between">
+                <service.icon className="h-10 w-10 text-[#74c69d]" />
+                {service.popular ? (
+                  <span className="rounded-full bg-[#e9c46a] px-3 py-1 text-xs font-black text-[#081c15]">
+                    Most Popular
+                  </span>
+                ) : null}
+              </div>
+              <h3 className="font-display text-2xl font-bold">{service.name}</h3>
+              <p className="mt-3 leading-7 text-white/66">{service.description}</p>
+              <Link
+                href="/services"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#74c69d]"
+              >
+                Learn More <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
+
+      <section className="bg-white px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.75fr_1fr]">
+          <div>
+            <p className="eyebrow">Why Eco Elan</p>
+            <h2 className="mt-4 font-display text-5xl font-black italic text-[#081c15] md:text-6xl">
+              Why Families Choose Eco Elan
+            </h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {features.map((feature) => (
+              <article
+                key={feature.title}
+                className="rounded-lg border border-[#2d6a4f]/12 bg-[#f8f9f4] p-7"
+              >
+                <feature.icon className="mb-5 h-9 w-9 text-[#2d6a4f]" />
+                <h3 className="font-display text-2xl font-bold text-[#081c15]">
+                  {feature.title}
+                </h3>
+                <p className="mt-3 leading-7 text-[#1a1a1a]/70">{feature.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-24 sm:px-6 lg:px-8">
+        <SectionIntro
+          label="How It Works"
+          title="A Better Clean in Three Simple Steps"
+        />
+        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+          {steps.map((step, index) => (
+            <article key={step.title} className="relative rounded-lg bg-white p-8">
+              <span className="mb-8 flex h-12 w-12 items-center justify-center rounded-full bg-[#2d6a4f] font-bold text-white">
+                {index + 1}
+              </span>
+              <h3 className="font-display text-3xl font-bold italic text-[#081c15]">
+                {step.title}
+              </h3>
+              <p className="mt-4 leading-7 text-[#1a1a1a]/68">{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-[#081c15] px-4 py-24 text-white sm:px-6 lg:px-8">
+        <SectionIntro
+          dark
+          label="Subscriptions"
+          title="Save More With a Subscription"
+        />
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
+          {plans.map((plan) => (
+            <article
+              key={plan.name}
+              className={`relative rounded-lg border p-8 ${
+                plan.popular
+                  ? "border-[#e9c46a] bg-white text-[#081c15]"
+                  : "border-white/12 bg-white/6"
+              }`}
+            >
+              {plan.popular ? (
+                <span className="absolute right-6 top-6 rounded-full bg-[#e9c46a] px-3 py-1 text-xs font-black uppercase tracking-widest">
+                  Most Popular
+                </span>
+              ) : null}
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#74c69d]">
+                {plan.name}
+              </p>
+              <h3 className="mt-4 font-display text-4xl font-black italic">
+                {plan.cadence}
+              </h3>
+              <p className="mt-2 text-sm opacity-65">Contact us for pricing</p>
+              <ul className="mt-8 space-y-4">
+                {plan.items.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm">
+                    <Check className="h-5 w-5 shrink-0 text-[#74c69d]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Button
+                asChild
+                className={`mt-8 w-full rounded-full ${
+                  plan.popular
+                    ? "bg-[#2d6a4f] text-white hover:bg-[#245840]"
+                    : "bg-[#e9c46a] text-[#081c15] hover:bg-[#f3d77f]"
+                }`}
+              >
+                <Link href={plan.name === "Premium" ? "/contact" : "/book"}>
+                  {plan.cta}
+                </Link>
+              </Button>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-4 py-24 sm:px-6 lg:px-8">
+        <SectionIntro label="Testimonials" title="What Our Clients Say" />
+        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
+          {testimonials.map((testimonial) => (
+            <article
+              key={testimonial.name}
+              className="rounded-lg bg-white p-8 shadow-eco-sm"
+            >
+              <div className="mb-5 flex gap-1 text-[#e9c46a]">
+                {[...Array(5)].map((_, index) => (
+                  <Star key={index} className="h-5 w-5 fill-current" />
+                ))}
+              </div>
+              <p className="text-lg leading-8 text-[#1a1a1a]/76">
+                "{testimonial.text}"
+              </p>
+              <p className="mt-6 font-bold text-[#2d6a4f]">
+                - {testimonial.name}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-[#081c15] px-4 py-24 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1fr]">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#e9c46a]">
+              Book Online
+            </p>
+            <h2 className="mt-4 font-display text-5xl font-black italic md:text-6xl">
+              Ready for a Cleaner Home?
+            </h2>
+            <p className="mt-5 max-w-lg text-lg leading-8 text-white/70">
+              Book in under 2 minutes. First-time clients get 20% off.
+            </p>
+            <div className="mt-8 flex items-center gap-3 text-white/72">
+              <MessageCircle className="h-5 w-5 text-[#74c69d]" />
+              info@ecoelan.com
             </div>
           </div>
-        </section>
-      </div>
-    </PageTransition>
+          <div className="rounded-lg border border-white/12 bg-white/8 p-6 shadow-eco-lg backdrop-blur">
+            <BookingLeadForm />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function StatCard({
+  value,
+  label,
+  className,
+}: {
+  value: string;
+  label: string;
+  className: string;
+}) {
+  return (
+    <div
+      className={`absolute hidden rounded-lg border border-white/15 bg-[#081c15]/90 px-5 py-4 text-white shadow-eco-md backdrop-blur md:block ${className}`}
+    >
+      <p className="font-display text-3xl font-black italic text-[#e9c46a]">
+        {value}
+      </p>
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/60">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+function SectionIntro({
+  label,
+  title,
+  dark = false,
+}: {
+  label: string;
+  title: string;
+  dark?: boolean;
+}) {
+  return (
+    <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
+      <p
+        className={`text-xs font-bold uppercase tracking-[0.28em] ${
+          dark ? "text-[#e9c46a]" : "text-[#2d6a4f]"
+        }`}
+      >
+        {label}
+      </p>
+      <h2
+        className={`mt-4 font-display text-5xl font-black italic md:text-6xl ${
+          dark ? "text-white" : "text-[#081c15]"
+        }`}
+      >
+        {title}
+      </h2>
+    </div>
   );
 }

@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = process.env.NEXT_PUBLIC_RESEND_API_KEY 
-  ? new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY)
+const resendKey = process.env.RESEND_API_KEY || process.env.NEXT_PUBLIC_RESEND_API_KEY;
+const resend = resendKey
+  ? new Resend(resendKey)
   : null;
 
 export async function POST(request: Request) {
@@ -69,7 +70,7 @@ export async function POST(request: Request) {
     const { data: emailData, error } = await resend.emails.send({
       from: "Eco Elan <onboarding@resend.dev>", // Change this to your verified domain
       to: [email],
-      bcc: process.env.NEXT_PUBLIC_ADMIN_EMAIL, // Optional: Send copy to admin
+      bcc: process.env.ADMIN_EMAIL || "info@ecoelan.com",
       subject: `Booking Confirmed – Order #${displayOrderId} 🌿`,
       html: `
         <div style="font-family: 'Arial', 'Helvetica', sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 30px; border-radius: 16px;">
@@ -175,7 +176,7 @@ export async function POST(request: Request) {
           <div style="background-color: #ffffff; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
             <h3 style="color: #14532d; margin-top: 0;">📞 Need to Make Changes?</h3>
             <p style="color: #374151; margin-bottom: 20px;">
-              Contact us at <strong>support@ecoelan.com</strong> or call <strong>(416) 555-0123</strong>
+              Contact us at <strong>info@ecoelan.com</strong> or call <strong>+1(437) 2654977</strong>
             </p>
             <p style="color: #6b7280; font-size: 14px;">
               This is an automated confirmation. Please do not reply directly to this email.
