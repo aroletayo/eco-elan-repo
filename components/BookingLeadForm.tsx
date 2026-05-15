@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -15,7 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { db } from "@/lib/firebase";
 import { generateOrderId } from "@/lib/order-id";
 
 const serviceTypes = [
@@ -49,46 +47,19 @@ export function BookingLeadForm() {
     const orderId = generateOrderId();
 
     try {
-      await addDoc(collection(db, "bookings"), {
-        ...formData,
-        orderId,
-        source: "homepage-cta",
-        status: "pending",
-        createdAt: serverTimestamp(),
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          orderId,
+          source: "website-booking-form",
+        }),
       });
 
-      await Promise.allSettled([
-        fetch("/api/send-email", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: formData.email,
-            orderId,
-            fullName: formData.name,
-            serviceType: formData.service,
-            date: formData.preferredDate || "To be scheduled",
-            time: "TBD",
-            address: "To be confirmed",
-            city: "Ontario",
-            notes: formData.message,
-          }),
-        }),
-        fetch("/api/notify-admin", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fullName: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            address: "To be confirmed",
-            serviceType: formData.service,
-            date: formData.preferredDate || "To be scheduled",
-            time: "TBD",
-            amount: "Contact us for pricing",
-            orderId,
-          }),
-        }),
-      ]);
+      if (!response.ok) {
+        throw new Error("Booking request failed");
+      }
 
       toast.success("Booking request sent", {
         description: "We will confirm your eco cleaning appointment shortly.",
