@@ -1,366 +1,166 @@
-"use client";
-
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { usePricing } from "@/hooks/use-pricing";
-import { useContent } from "@/hooks/use-content";
-import PageLoader from "@/components/PageLoader";
 import {
-  CheckCircle2,
   ArrowRight,
-  Sparkles,
-  Leaf,
-  Home,
-  Plane,
   Building2,
+  Check,
+  Home,
+  Leaf,
+  ShieldCheck,
+  Sparkles,
+  SprayCan,
+  Trees,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-const cleaningKitchen = "/assets/cleaning-kitchen.webp";
-const cleaningBathroom = "/assets/cleaning-bathroom.webp";
-const cleaningOffice = "/assets/Ecoelan-services.webp";
+const services = [
+  {
+    icon: Home,
+    title: "Regular House Cleaning",
+    description: "A polished maintenance clean using eco-safe, plant-based products.",
+    tiers: ["Condos and apartments", "Townhomes", "Detached homes"],
+  },
+  {
+    icon: Sparkles,
+    title: "Deep Cleaning",
+    description: "A full-detail clean for first-time clients, seasonal resets, and buildup.",
+    tiers: ["Kitchen detail", "Bathroom reset", "Whole-home refresh"],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Move In / Move Out Cleaning",
+    description: "Complete top-to-bottom cleaning for empty homes and handoffs.",
+    tiers: ["Inside appliances", "Inside cabinets", "Baseboards and trims"],
+  },
+  {
+    icon: Trees,
+    title: "Eco Lawn Care",
+    description: "Sustainable outdoor care that supports healthy curb appeal.",
+    tiers: ["Seasonal care", "Recurring maintenance", "Custom outdoor plans"],
+  },
+  {
+    icon: Building2,
+    title: "Commercial Cleaning",
+    description: "Healthier workspaces for offices, clinics, retail, and shared spaces.",
+    tiers: ["Daily", "Weekly", "Custom contracts"],
+  },
+  {
+    icon: SprayCan,
+    title: "Window Cleaning",
+    description: "Clear, streak-free interior glass without harsh chemical residue.",
+    tiers: ["Interior windows", "Monthly add-on", "Subscription inclusion"],
+  },
+];
+
+const inclusions = [
+  "100% non-toxic products",
+  "Trained & trusted team",
+  "Flexible scheduling",
+  "Satisfaction guaranteed",
+  "Safe for children and pets",
+  "20% OFF first service",
+];
 
 export default function ServicesPage() {
-  const { pricing, loading: pricingLoading } = usePricing();
-  const { content, loading: contentLoading } = useContent();
-
-  if (pricingLoading || contentLoading) {
-    return <PageLoader />;
-  }
-
-  const services = [
-    {
-      icon: Sparkles,
-      title: content.services.standardTitle,
-      description: content.services.standardDescription,
-      includes: [
-        "Dusting & wiping surfaces",
-        "Eco-friendly kitchen clean",
-        "Non-toxic bathroom sanitize",
-        "Floors vacuumed & mopped",
-        "Beds tidied",
-        "Trash removal",
-        "Pet-safe products only",
-      ],
-      prices: [
-        { type: "Studio", price: `$${pricing.services.standard}` },
-        {
-          type: "1 Bedroom",
-          price: `$${Math.round(pricing.services.standard * 1.18)}`,
-        },
-        {
-          type: "2 Bedroom",
-          price: `$${Math.round(pricing.services.standard * 1.45)}`,
-        },
-        {
-          type: "3 Bedroom",
-          price: `$${Math.round(pricing.services.standard * 1.82)}`,
-        },
-        {
-          type: "4 Bedroom House",
-          price: `$${Math.round(pricing.services.standard * 2.59)}`,
-        },
-      ],
-    },
-    {
-      icon: Leaf,
-      title: content.services.deepTitle,
-      description: content.services.deepDescription,
-      includes: [
-        "Everything in Standard Clean plus:",
-        "Baseboards & trims",
-        "Light fixtures & switches",
-        "Behind small appliances",
-        "Eco scrubbing for tough areas",
-        "Deep bathroom sanitization",
-        "Window sills & frames",
-      ],
-      prices: [
-        { type: "1 Bedroom", price: `$${pricing.services.deep}` },
-        {
-          type: "2 Bedroom",
-          price: `$${Math.round(pricing.services.deep * 1.3)}`,
-        },
-        {
-          type: "3 Bedroom House",
-          price: `$${Math.round(pricing.services.deep * 1.55)}`,
-        },
-        {
-          type: "4 Bedroom House",
-          price: `$${Math.round(pricing.services.deep * 1.8)}`,
-        },
-      ],
-    },
-    {
-      icon: Home,
-      title: "Eco Move-In/Move-Out Cleaning",
-      description: "Complete top-to-bottom luxury clean for empty homes.",
-      includes: [
-        "Inside fridge",
-        "Inside oven",
-        "Inside cabinets",
-        "Baseboards",
-        "Door frames",
-        "Full room sanitization",
-        "Chemical-free products throughout",
-      ],
-      prices: [
-        { type: "1 Bedroom", price: `$${pricing.services.moveinout}` },
-        {
-          type: "2 Bedroom",
-          price: `$${Math.round(pricing.services.moveinout * 1.17)}`,
-        },
-        {
-          type: "3 Bedroom",
-          price: `$${Math.round(pricing.services.moveinout * 1.5)}`,
-        },
-        {
-          type: "4 Bedroom House",
-          price: `$${Math.round(pricing.services.moveinout * 1.75)}`,
-        },
-      ],
-    },
-    {
-      icon: Plane,
-      title: content.services.airbnbTitle,
-      description: content.services.airbnbDescription,
-      includes: [
-        "Bed linen change",
-        "Laundry (optional)",
-        "Restocking essentials",
-        "Kitchen reset",
-        "Bathroom refresh",
-        "Sanitizing high-touch areas",
-      ],
-      prices: [
-        { type: "Studio/1 Bedroom", price: `$${pricing.services.airbnb}` },
-        {
-          type: "2 Bedroom",
-          price: `$${Math.round(pricing.services.airbnb * 1.25)}`,
-        },
-        {
-          type: "3 Bedroom",
-          price: `$${Math.round(pricing.services.airbnb * 1.46)}`,
-        },
-      ],
-    },
-    {
-      icon: Building2,
-      title: "Eco Office Cleaning",
-      description: "A healthier workspace with non-toxic products.",
-      includes: [
-        "Desks & surfaces",
-        "Washrooms",
-        "Floors",
-        "Kitchenettes",
-        "Garbage removal",
-        "Eco sanitizing",
-      ],
-      prices: [
-        { type: "Hourly Rate", price: `$${pricing.services.office}/hr` },
-      ],
-    },
-  ];
-
-  const addOns = [
-    { name: "Inside Fridge", price: `$${pricing.addons.fridge}` },
-    { name: "Inside Oven", price: `$${pricing.addons.oven}` },
-    { name: "Windows Interior", price: `$${pricing.addons.windows} each` },
-    { name: "Inside Cabinets", price: `$${pricing.addons.cabinets}` },
-    { name: "Laundry", price: `$${pricing.addons.laundry}` },
-    { name: "Balcony Cleaning", price: `$${pricing.addons.balcony}` },
-  ];
-
-  const serviceImages = [
-    cleaningKitchen,
-    cleaningBathroom,
-    cleaningOffice,
-    cleaningKitchen,
-    cleaningOffice,
-  ];
-
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative section-padding overflow-hidden bg-gradient-to-b from-eco-green-light to-background">
-        <div className="container-custom text-center relative z-10">
-          <h1 className=" p-4 font-display text-5xl md:text-6xl font-bold text-primary mb-6">
-            Premium <span className="text-accent">Eco Cleaning </span> Services
-          </h1>
-
-          <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-8">
-            From regular maintenance to deep cleaning, we have got your space
-            covered with eco-conscious care and premium quality.
-          </p>
-
-          <Button variant="accent" size="lg" asChild>
-            <Link href="/book">
-              Book a Service
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
-        </div>
-      </section>
-
-      {/* Services Gallery */}
-      <section className="py-8 px-5 bg-muted/30">
-        <div className="container-custom">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="group rounded-2xl overflow-hidden aspect-video cursor-pointer">
-              <img
-                src={cleaningKitchen}
-                alt="Kitchen cleaning"
-                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-              />
-            </div>
-
-            <div className="group rounded-2xl overflow-hidden aspect-video cursor-pointer">
-              <img
-                src={cleaningBathroom}
-                alt="Bathroom cleaning"
-                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-              />
-            </div>
-
-            <div className="group rounded-2xl overflow-hidden aspect-video cursor-pointer">
-              <img
-                src={cleaningOffice}
-                alt="Office cleaning"
-                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-              />
-            </div>
+    <div className="bg-[#f8f9f4] pt-20">
+      <section className="relative overflow-hidden bg-[#081c15] px-4 py-24 text-white sm:px-6 lg:px-8">
+        <Image
+          src="/assets/Ecoelan-services.webp"
+          alt="Eco Elan services"
+          fill
+          priority
+          className="object-cover opacity-22"
+        />
+        <div className="absolute inset-0 bg-[#081c15]/82" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1fr] lg:items-end">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#e9c46a]">
+              Services
+            </p>
+            <h1 className="mt-5 font-display text-6xl font-black italic leading-none md:text-7xl">
+              Premium Eco Cleaning Services
+            </h1>
           </div>
+          <p className="max-w-2xl text-lg leading-8 text-white/74">
+            From regular maintenance to deep cleaning, lawn care, commercial
+            spaces, and windows, Eco Elan brings modern eco luxury to every
+            service across Ontario.
+          </p>
         </div>
       </section>
 
-      {/* Services List */}
-      <section className="section-padding">
-        <div className="container-custom space-y-16">
-          {services.map((service, index) => (
-            <div
+      <section className="px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <article
               key={service.title}
-              className={`grid lg:grid-cols-2 gap-12 items-start ${
-                index % 2 === 1 ? "lg:flex-row-reverse" : ""
-              }`}
+              className="rounded-lg border border-[#74c69d]/20 bg-[#081c15] p-7 text-white shadow-eco-md transition hover:-translate-y-1 hover:border-[#74c69d]/70"
             >
-              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="flex items-center gap-4 mb-6">
-                  <h2 className="font-display text-3xl font-bold text-primary">
-                    {service.title}
-                  </h2>
-                </div>
-
-                <p className="text-muted-foreground text-lg mb-8">
-                  {service.description}
+              <service.icon className="mb-8 h-10 w-10 text-[#74c69d]" />
+              <h2 className="font-display text-3xl font-bold italic">
+                {service.title}
+              </h2>
+              <p className="mt-4 leading-7 text-white/66">{service.description}</p>
+              <div className="mt-7 rounded-lg border border-white/10 bg-white/5 p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e9c46a]">
+                  Pricing tiers
                 </p>
-
-                <div className="space-y-3 mb-8">
-                  <p className="font-semibold text-foreground">Includes:</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {service.includes.map((item) => (
-                      <div key={item} className="flex items-center gap-2">
-                        <CheckCircle2 className="w-5 h-5 text-accent shrink-0" />
-                        <span className="text-muted-foreground text-sm">
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <Button variant="accent" asChild>
-                  <Link href="/book">
-                    Book This Service
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-
-              <div
-                className={`bg-card rounded-3xl p-8 shadow-eco-md ${
-                  index % 2 === 1 ? "lg:order-1" : ""
-                }`}
-              >
-                <h3 className="font-display text-xl font-semibold text-primary mb-6">
-                  Pricing
-                </h3>
-                <div className="space-y-4">
-                  {service.prices.map((price) => (
-                    <div
-                      key={price.type}
-                      className="flex justify-between items-center py-3 border-b border-border last:border-0"
-                    >
-                      <span className="text-muted-foreground">
-                        {price.type}
-                      </span>
-                      <span className="font-display text-2xl font-bold text-accent">
-                        {price.price}
-                      </span>
-                    </div>
+                <ul className="mt-4 space-y-3">
+                  {service.tiers.map((tier) => (
+                    <li key={tier} className="flex gap-3 text-sm text-white/74">
+                      <Check className="h-5 w-5 shrink-0 text-[#74c69d]" />
+                      {tier}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-            </div>
+              <Link
+                href="/book"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#74c69d]"
+              >
+                Book This Service <ArrowRight className="h-4 w-4" />
+              </Link>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Add-Ons Section */}
-      <section className="section-padding bg-secondary">
-        <div className="container-custom">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="inline-block text-accent font-medium text-sm uppercase tracking-wider mb-4">
-              Customize Your Clean
-            </span>
-            <h2 className="font-display text-4xl font-bold text-primary mb-4">
-              Add-On Services
+      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.75fr_1fr]">
+          <div>
+            <p className="eyebrow">Included</p>
+            <h2 className="mt-4 font-display text-5xl font-black italic text-[#081c15]">
+              Every clean is built around safety and finish
             </h2>
-            <p className="text-muted-foreground">
-              Enhance any cleaning with these additional services.
-            </p>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {addOns.map((addon) => (
+          <div className="grid gap-4 sm:grid-cols-2">
+            {inclusions.map((item) => (
               <div
-                key={addon.name}
-                className="bg-card rounded-2xl p-6 text-center shadow-eco-sm card-hover"
+                key={item}
+                className="flex items-center gap-4 rounded-lg bg-[#f8f9f4] p-5"
               >
-                <p className="font-medium text-foreground mb-2">{addon.name}</p>
-                <p className="text-accent font-display text-xl font-bold">
-                  {addon.price}
-                </p>
+                <Leaf className="h-5 w-5 shrink-0 text-[#2d6a4f]" />
+                <span className="font-semibold text-[#081c15]">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-primary">
-        <div className="container-custom text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-            Ready to Book Your Eco Clean?
-          </h2>
-          <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
-            Experience the difference of premium eco-friendly cleaning.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button variant="accent" size="lg" asChild>
-              <Link href="/book">
-                Book Now
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-              asChild
-            >
-              <Link href="/subscriptions">View Plans</Link>
-            </Button>
-          </div>
-        </div>
+      <section className="bg-[#081c15] px-4 py-20 text-center text-white sm:px-6 lg:px-8">
+        <h2 className="font-display text-5xl font-black italic">
+          Ready to book your first eco clean?
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-white/70">
+          First-time clients get 20% off. We will confirm exact pricing after
+          matching your service, home size, and schedule.
+        </p>
+        <Link
+          href="/book"
+          className="mt-8 inline-flex h-14 items-center gap-2 rounded-full bg-[#e9c46a] px-8 font-bold text-[#081c15]"
+        >
+          Book Now <ArrowRight className="h-5 w-5" />
+        </Link>
       </section>
     </div>
   );
