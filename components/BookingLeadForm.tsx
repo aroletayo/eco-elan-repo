@@ -1,28 +1,54 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  Building2,
+  CheckCircle2,
+  Home,
+  ShieldCheck,
+  Sparkles,
+  SprayCan,
+  Trees,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { generateOrderId } from "@/lib/order-id";
 
 const serviceTypes = [
-  "Regular House Cleaning",
-  "Deep Cleaning",
-  "Move In / Move Out Cleaning",
-  "Eco Lawn Care",
-  "Commercial Cleaning",
-  "Window Cleaning",
+  {
+    name: "Regular House Cleaning",
+    price: "From $110",
+    icon: Home,
+  },
+  {
+    name: "Deep Cleaning",
+    price: "From $200",
+    icon: Sparkles,
+  },
+  {
+    name: "Move In / Move Out Cleaning",
+    price: "From $240",
+    icon: ShieldCheck,
+  },
+  {
+    name: "Eco Lawn Care",
+    price: "Custom quote",
+    icon: Trees,
+  },
+  {
+    name: "Commercial Cleaning",
+    price: "From $50/hr",
+    icon: Building2,
+  },
+  {
+    name: "Window Cleaning",
+    price: "Custom quote",
+    icon: SprayCan,
+  },
 ];
 
 export function BookingLeadForm() {
@@ -84,6 +110,47 @@ export function BookingLeadForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#e9c46a]">
+          Choose your service
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {serviceTypes.map((service) => {
+            const selected = formData.service === service.name;
+            return (
+              <button
+                key={service.name}
+                type="button"
+                onClick={() => updateField("service", service.name)}
+                className={`rounded-lg border p-4 text-left transition ${
+                  selected
+                    ? "border-[#e9c46a] bg-[#e9c46a] text-[#081c15]"
+                    : "border-white/12 bg-white/8 text-white hover:border-[#74c69d]/70"
+                }`}
+              >
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <service.icon
+                    className={`h-6 w-6 ${
+                      selected ? "text-[#081c15]" : "text-[#74c69d]"
+                    }`}
+                  />
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-black ${
+                      selected
+                        ? "bg-[#081c15] text-white"
+                        : "bg-white/10 text-[#e9c46a]"
+                    }`}
+                  >
+                    {service.price}
+                  </span>
+                </div>
+                <span className="block text-sm font-bold">{service.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2">
         <Input
           required
@@ -107,22 +174,13 @@ export function BookingLeadForm() {
           value={formData.phone}
           onChange={(event) => updateField("phone", event.target.value)}
         />
-        <Select
+        <Input
+          readOnly
           required
           value={formData.service}
-          onValueChange={(value) => updateField("service", value)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Service type" />
-          </SelectTrigger>
-          <SelectContent>
-            {serviceTypes.map((service) => (
-              <SelectItem key={service} value={service}>
-                {service}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          placeholder="Select a service above"
+          className="cursor-default"
+        />
       </div>
       <Input
         type="date"
