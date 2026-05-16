@@ -19,8 +19,14 @@ import {
 } from "@/components/animations";
 import { motion } from "framer-motion";
 import { staggerItem } from "@/components/animations";
-import { useContent } from "@/hooks/use-content";
-import PageLoader from "@/components/PageLoader";
+
+const aboutContent = {
+  title: "About eco-elan",
+  description:
+    "We are a team of professional cleaners dedicated to providing eco-friendly cleaning services.",
+  mission:
+    "Our mission is to provide exceptional cleaning while protecting the environment.",
+};
 
 const values = [
   {
@@ -75,12 +81,6 @@ const faqs = [
 ];
 
 export default function AboutPage() {
-  const { content, loading } = useContent();
-
-  if (loading) {
-    return <PageLoader />;
-  }
-
   return (
     <PageTransition>
       <div className="flex flex-col">
@@ -89,11 +89,11 @@ export default function AboutPage() {
           <div className="container-custom">
             <FadeIn className="max-w-3xl mx-auto text-center">
               <h1 className=" p-5 font-display text-5xl md:text-6xl font-bold text-primary mb-6">
-                {content.about.title}
+                {aboutContent.title}
               </h1>
 
               <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-                {content.about.description}
+                {aboutContent.description}
               </p>
             </FadeIn>
           </div>
@@ -129,7 +129,7 @@ export default function AboutPage() {
                     Our Mission
                   </h3>
                   <p className="text-muted-foreground italic">
-                    "{content.about.mission}"
+                    "{aboutContent.mission}"
                   </p>
                 </div>
               </FadeIn>
@@ -179,7 +179,7 @@ export default function AboutPage() {
             </div>
 
             <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {values.map((value, index) => (
+              {values.map((value) => (
                 <motion.div
                   key={value.title}
                   variants={staggerItem}
