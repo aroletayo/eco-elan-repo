@@ -14,8 +14,14 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { FadeIn, PageTransition } from "@/components/animations";
-import { useContent } from "@/hooks/use-content";
-import PageLoader from "@/components/PageLoader";
+
+const contactContent = {
+  title: "Contact Us",
+  subtitle: "Get in touch with our team",
+  phone: "+1(437) 2654977",
+  email: "info@eco-elan.com",
+  address: "Ontario, Canada",
+};
 
 const serviceOptions = [
   "Standard Eco Cleaning",
@@ -30,7 +36,6 @@ const serviceOptions = [
 
 const ContactPage = () => {
   const { toast } = useToast();
-  const { content, loading } = useContent();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -39,10 +44,6 @@ const ContactPage = () => {
     service: "",
     message: "",
   });
-
-  if (loading) {
-    return <PageLoader />;
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,15 +71,18 @@ const ContactPage = () => {
     <PageTransition>
       <div className="flex flex-col">
         {/* Hero Section */}
-        <section className="section-padding bg-gradient-to-b from-eco-green-light to-background">
+        <section className="section-padding bg-[#081c15]">
           <div className="container-custom text-center">
             <FadeIn>
-              <h1 className="font-display text-5xl md:text-6xl font-bold text-primary mb-6">
-                {content.contact.title}
+              <span className="mb-5 inline-block rounded-full border border-[#74c69d]/35 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#e9c46a]">
+                We are here to help
+              </span>
+              <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
+                {contactContent.title}
               </h1>
 
-              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
-                {content.contact.subtitle}
+              <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto">
+                {contactContent.subtitle}
               </p>
             </FadeIn>
           </div>
@@ -104,10 +108,10 @@ const ContactPage = () => {
                           Phone
                         </p>
                         <a
-                          href={`tel:${content.contact.phone}`}
+                          href={`tel:${contactContent.phone}`}
                           className="text-muted-foreground hover:text-accent transition-colors"
                         >
-                          {content.contact.phone}
+                          {contactContent.phone}
                         </a>
                       </div>
                     </div>
@@ -121,10 +125,10 @@ const ContactPage = () => {
                           Email
                         </p>
                         <a
-                          href={`mailto:${content.contact.email}`}
+                          href={`mailto:${contactContent.email}`}
                           className="text-muted-foreground hover:text-accent transition-colors"
                         >
-                          {content.contact.email}
+                          {contactContent.email}
                         </a>
                       </div>
                     </div>
@@ -138,7 +142,7 @@ const ContactPage = () => {
                           Service Area
                         </p>
                         <p className="text-muted-foreground">
-                          {content.contact.address}
+                          {contactContent.address}
                         </p>
                       </div>
                     </div>

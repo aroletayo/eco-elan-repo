@@ -85,14 +85,17 @@ export default function AboutPage() {
     <PageTransition>
       <div className="flex flex-col">
         {/* Hero Section */}
-        <section className="section-padding bg-gradient-to-b from-eco-green-light to-background">
+        <section className="section-padding bg-[#081c15]">
           <div className="container-custom">
             <FadeIn className="max-w-3xl mx-auto text-center">
-              <h1 className=" p-5 font-display text-5xl md:text-6xl font-bold text-primary mb-6">
+              <span className="mb-5 inline-block rounded-full border border-[#74c69d]/35 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#e9c46a]">
+                Our Story
+              </span>
+              <h1 className="p-5 font-display text-5xl md:text-6xl font-bold text-white mb-6">
                 {aboutContent.title}
               </h1>
 
-              <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+              <p className="text-white/75 text-lg md:text-xl leading-relaxed">
                 {aboutContent.description}
               </p>
             </FadeIn>
@@ -284,7 +287,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section-padding bg-primary">
+        <section className="section-padding bg-[#081c15]">
           <div className="container-custom text-center">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
               Ready to Experience eco-elan?
