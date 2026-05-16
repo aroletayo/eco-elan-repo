@@ -29,14 +29,13 @@ export async function POST(request: Request) {
   }
 
   const booking = result.data;
-  const sheetResult = await appendToGoogleSheet(booking);
   const emailResult = await sendBookingEmails(booking);
 
-  if (!sheetResult.ok && !emailResult.ok) {
+  if (!emailResult.ok) {
     return NextResponse.json(
       {
         error:
-          "Booking capture is not configured yet. Please call +1(437) 2654977.",
+          "Booking email is not configured yet. Please call +1(437) 2654977.",
       },
       { status: 503 }
     );
@@ -45,37 +44,13 @@ export async function POST(request: Request) {
   return NextResponse.json({
     success: true,
     orderId: booking.orderId,
-    storedInSheet: sheetResult.ok,
     emailSent: emailResult.ok,
   });
 }
 
-async function appendToGoogleSheet(booking: Booking): Promise<{ ok: boolean }> {
-  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-
-  if (!webhookUrl) {
-    return { ok: false };
-  }
-
-  try {
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...booking,
-        createdAt: new Date().toISOString(),
-      }),
-    });
-
-    return { ok: response.ok };
-  } catch (error) {
-    console.error("Google Sheets booking append failed:", error);
-    return { ok: false };
-  }
-}
-
 async function sendBookingEmails(booking: Booking): Promise<{ ok: boolean }> {
   if (!resend) {
+    console.error("RESEND_API_KEY is not configured.");
     return { ok: false };
   }
 
