@@ -30,8 +30,8 @@ export function Footer() {
                 height={96}
                 className="h-20 w-20 object-contain"
               />
-              <span className="font-display text-3xl font-bold italic">
-                Eco Elan
+              <span className="brand-wordmark text-4xl font-bold italic">
+                Eco-Elan
               </span>
             </Link>
             <p className="max-w-xs text-sm leading-6 text-white/68">
@@ -44,7 +44,7 @@ export function Footer() {
                   key={index}
                   href={index === 0 ? "https://instagram.com/ecoelancleaning" : "#"}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/75 transition hover:border-[#74c69d] hover:text-[#74c69d]"
-                  aria-label="Eco Elan social link"
+                  aria-label="Eco-Elan social link"
                 >
                   <Icon className="h-5 w-5" />
                 </a>
@@ -110,7 +110,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Eco Elan. All rights reserved.</p>
+          <p>© 2026 Eco-Elan. All rights reserved.</p>
           <p>eco-elan.ca</p>
         </div>
       </div>

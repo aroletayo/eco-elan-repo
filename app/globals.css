@@ -131,6 +131,11 @@
   .cream-band {
     @apply bg-[#f8f9f4];
   }
+
+  .brand-wordmark {
+    font-family: var(--font-display-two), serif;
+    letter-spacing: 0;
+  }
 }
 
 @layer utilities {

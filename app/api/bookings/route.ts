@@ -61,12 +61,12 @@ async function sendBookingEmails(booking: Booking): Promise<{ ok: boolean }> {
 
     await Promise.all([
       resend.emails.send({
-        from: "Eco Elan <onboarding@resend.dev>",
+        from: "Eco-Elan <onboarding@resend.dev>",
         to: [booking.email],
-        subject: `Eco Elan booking request received - ${booking.orderId}`,
+        subject: `Eco-Elan booking request received - ${booking.orderId}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
-            <h1 style="color: #2d6a4f;">Your Eco Elan request is in</h1>
+            <h1 style="color: #2d6a4f;">Your Eco-Elan request is in</h1>
             <p>Hi ${booking.name},</p>
             <p>Thanks for requesting a premium eco-friendly cleaning service. We will confirm availability shortly.</p>
             <div style="background: #f8f9f4; padding: 20px; border-radius: 8px;">
@@ -80,9 +80,9 @@ async function sendBookingEmails(booking: Booking): Promise<{ ok: boolean }> {
         `,
       }),
       resend.emails.send({
-        from: "Eco Elan Bookings <onboarding@resend.dev>",
+        from: "Eco-Elan Bookings <onboarding@resend.dev>",
         to: [adminEmail],
-        subject: `New Eco Elan booking request - ${booking.service}`,
+        subject: `New Eco-Elan booking request - ${booking.service}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 640px; color: #1a1a1a;">
             <h1 style="color: #2d6a4f;">New booking request</h1>

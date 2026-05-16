@@ -22,12 +22,12 @@ export default function BookPage() {
           className="object-cover opacity-24"
         />
         <div className="absolute inset-0 bg-[#081c15]/84" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-center">
+        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1fr] lg:items-center">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#e9c46a]">
               Book Online
             </p>
-            <h1 className="mt-5 font-display text-6xl font-black italic leading-none md:text-7xl">
+            <h1 className="mt-5 font-display text-6xl font-bold italic leading-none md:text-7xl">
               Book Your Eco Clean
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/74">
@@ -45,7 +45,19 @@ export default function BookPage() {
             </div>
           </div>
 
-          <div className="rounded-lg border border-white/12 bg-white/8 p-5 shadow-eco-lg backdrop-blur md:p-8">
+          <div className="rounded-lg border border-[#e9c46a]/25 bg-[linear-gradient(145deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06))] p-5 shadow-[0_34px_90px_rgba(0,0,0,0.34)] backdrop-blur-xl md:p-8">
+            <div className="mb-6 border-b border-white/10 pb-5">
+              <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#e9c46a]">
+                Eco-Elan concierge
+              </p>
+              <h2 className="brand-wordmark mt-2 text-4xl font-bold italic text-white">
+                Tell us what you need
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-white/62">
+                Choose a service, leave your details, and we will confirm the
+                appointment by email or phone.
+              </p>
+            </div>
             <BookingLeadForm />
           </div>
         </div>

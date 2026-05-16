@@ -46,21 +46,45 @@ export default function Header() {
         }`}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/Ecoelan-logo-removebg.webp"
-              alt="Eco Elan"
-              width={84}
-              height={84}
-              priority
-              className="h-16 w-16 object-contain"
-            />
+          <Link
+            href="/"
+            className={`group flex items-center gap-3 rounded-full border py-2 pl-2 pr-5 transition-all duration-300 ${
+              isHeroTransparent
+                ? "border-white/15 bg-white/8 shadow-[0_18px_45px_rgba(0,0,0,0.12)] backdrop-blur-md"
+                : "border-[#2d6a4f]/12 bg-[#f8f9f4] shadow-[0_14px_34px_rgba(8,28,21,0.08)]"
+            }`}
+          >
             <span
-              className={`hidden font-display text-2xl font-bold italic sm:block ${
-                isHeroTransparent ? "text-white" : "text-[#081c15]"
+              className={`flex h-12 w-12 items-center justify-center rounded-full border transition ${
+                isHeroTransparent
+                  ? "border-[#74c69d]/25 bg-[#081c15]/70"
+                  : "border-[#2d6a4f]/10 bg-white"
               }`}
             >
-              Eco Elan
+              <Image
+                src="/Ecoelan-logo-removebg.webp"
+                alt="Eco Elan"
+                width={58}
+                height={58}
+                priority
+                className="h-10 w-10 object-contain transition duration-300 group-hover:scale-105"
+              />
+            </span>
+            <span className="flex flex-col leading-none">
+              <span
+                className={`brand-wordmark text-[32px] font-bold italic leading-none md:text-[36px] ${
+                  isHeroTransparent ? "text-white" : "text-[#081c15]"
+                }`}
+              >
+                Eco-Elan
+              </span>
+              <span
+                className={`mt-1 hidden text-[9px] font-bold uppercase tracking-[0.24em] sm:block ${
+                  isHeroTransparent ? "text-[#e9c46a]" : "text-[#2d6a4f]"
+                }`}
+              >
+                Green luxury care
+              </span>
             </span>
           </Link>
 
@@ -138,8 +162,8 @@ export default function Header() {
                   height={76}
                   className="h-14 w-14 object-contain"
                 />
-                <span className="font-display text-2xl font-bold italic">
-                  Eco Elan
+                <span className="brand-wordmark text-3xl font-bold italic">
+                  Eco-Elan
                 </span>
               </Link>
               <button

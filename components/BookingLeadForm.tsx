@@ -19,7 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { generateOrderId } from "@/lib/order-id";
 
 const fieldClassName =
-  "border-white/20 bg-white text-[#081c15] placeholder:text-[#081c15]/45 focus-visible:ring-[#e9c46a]";
+  "h-12 border-[#e9c46a]/25 bg-[#f8f9f4] text-[#081c15] placeholder:text-[#081c15]/45 shadow-inner shadow-[#081c15]/5 focus-visible:ring-[#e9c46a]";
 
 const serviceTypes = [
   {
@@ -125,10 +125,10 @@ export function BookingLeadForm() {
                 key={service.name}
                 type="button"
                 onClick={() => updateField("service", service.name)}
-                className={`rounded-lg border p-4 text-left transition ${
+                className={`rounded-lg border p-4 text-left transition duration-300 hover:-translate-y-0.5 ${
                   selected
-                    ? "border-[#e9c46a] bg-[#e9c46a] text-[#081c15]"
-                    : "border-white/12 bg-white/8 text-white hover:border-[#74c69d]/70"
+                    ? "border-[#e9c46a] bg-[#e9c46a] text-[#081c15] shadow-[0_18px_42px_rgba(233,196,106,0.18)]"
+                    : "border-white/12 bg-[#0d2a20]/70 text-white hover:border-[#74c69d]/70 hover:bg-[#123527]"
                 }`}
               >
                 <div className="mb-4 flex items-center justify-between gap-3">
@@ -147,7 +147,9 @@ export function BookingLeadForm() {
                     {service.price}
                   </span>
                 </div>
-                <span className="block text-sm font-bold">{service.name}</span>
+                <span className="block text-sm font-bold leading-snug">
+                  {service.name}
+                </span>
               </button>
             );
           })}
@@ -202,7 +204,7 @@ export function BookingLeadForm() {
       />
       <Button
         type="submit"
-        className="h-14 w-full rounded-full bg-[#e9c46a] text-[#081c15] hover:bg-[#f3d77f]"
+        className="h-14 w-full rounded-full bg-[#e9c46a] text-base font-black text-[#081c15] shadow-[0_18px_44px_rgba(233,196,106,0.2)] hover:bg-[#f3d77f]"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Sending..." : "Book My Cleaning"}
