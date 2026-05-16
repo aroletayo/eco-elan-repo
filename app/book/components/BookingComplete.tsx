@@ -33,7 +33,7 @@ export function BookingComplete({
               Booking Confirmed!
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Thank you for choosing Eco Elan. we have sent a confirmation email
+              Thank you for choosing eco-elan. we have sent a confirmation email
               to <strong>{email}</strong>
             </p>
 

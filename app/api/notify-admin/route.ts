@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     }
 
     const { error } = await resend.emails.send({
-      from: "Eco Elan Bookings <bookings@ecoelan.com>",
+      from: "eco-elan Bookings <bookings@eco-elan.com>",
       to: [adminEmail],
       subject: `📋 New Booking: ${booking.serviceType || "Service"}`,
       html: `

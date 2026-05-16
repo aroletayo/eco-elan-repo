@@ -128,11 +128,11 @@ const plans = [
 
 const testimonials = [
   {
-    text: "Eco Elan transformed our home. Everything smells fresh and clean without the harsh chemical smell. Our kids and dog love it.",
+    text: "eco-elan transformed our home. Everything smells fresh and clean without the harsh chemical smell. Our kids and dog love it.",
     name: "Sarah M., Toronto ON",
   },
   {
-    text: "I've tried many cleaning services. Eco Elan is the only one that uses products I actually trust around my family.",
+    text: "I've tried many cleaning services. eco-elan is the only one that uses products I actually trust around my family.",
     name: "James K., Mississauga ON",
   },
   {
@@ -152,7 +152,7 @@ export default function HomePage() {
       <section className="relative flex min-h-screen items-center overflow-hidden bg-[#081c15] px-4 pb-12 pt-28 text-white sm:px-6 lg:px-8">
         <Image
           src="/assets/hero-home.webp"
-          alt="Eco Elan premium eco cleaning"
+          alt="eco-elan premium eco cleaning"
           fill
           priority
           className="object-cover opacity-28"
@@ -238,7 +238,7 @@ export default function HomePage() {
               <div className="relative aspect-[4/5] overflow-hidden rounded-md">
                 <Image
                   src="/assets/cleaning-livingroom.webp"
-                  alt="Eco Elan service preview"
+                  alt="eco-elan service preview"
                   fill
                   className="object-cover"
                 />
@@ -304,9 +304,9 @@ export default function HomePage() {
       <section className="bg-white px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.75fr_1fr]">
           <div>
-            <p className="eyebrow">Why Eco Elan</p>
+            <p className="eyebrow">Why eco-elan</p>
             <h2 className="mt-4 font-display text-5xl font-black italic text-[#081c15] md:text-6xl">
-              Why Families Choose Eco Elan
+              Why Families Choose eco-elan
             </h2>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -437,7 +437,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex items-center gap-3 text-white/72">
               <MessageCircle className="h-5 w-5 text-[#74c69d]" />
-              info@ecoelan.com
+              info@eco-elan.com
             </div>
           </div>
           <div className="rounded-lg border border-white/12 bg-white/8 p-6 shadow-eco-lg backdrop-blur">

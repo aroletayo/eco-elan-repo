@@ -63,7 +63,7 @@ export default function Header() {
             >
               <Image
                 src="/Ecoelan-logo-removebg.webp"
-                alt="Eco Elan"
+                alt="eco-elan"
                 width={58}
                 height={58}
                 priority
@@ -76,7 +76,7 @@ export default function Header() {
                   isHeroTransparent ? "text-white" : "text-[#081c15]"
                 }`}
               >
-                Eco-Elan
+                eco-elan
               </span>
               <span
                 className={`mt-1 hidden text-[9px] font-bold uppercase tracking-[0.24em] sm:block ${
@@ -157,13 +157,13 @@ export default function Header() {
               >
                 <Image
                   src="/Ecoelan-logo-removebg.webp"
-                  alt="Eco Elan"
+                  alt="eco-elan"
                   width={76}
                   height={76}
                   className="h-14 w-14 object-contain"
                 />
                 <span className="brand-wordmark text-3xl font-bold italic">
-                  Eco-Elan
+                  eco-elan
                 </span>
               </Link>
               <button

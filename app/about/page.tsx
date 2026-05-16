@@ -287,7 +287,7 @@ export default function AboutPage() {
         <section className="section-padding bg-primary">
           <div className="container-custom text-center">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Ready to Experience Eco Elan?
+              Ready to Experience eco-elan?
             </h2>
             <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
               Book your first eco-friendly clean and see the difference for

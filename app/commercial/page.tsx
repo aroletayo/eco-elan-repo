@@ -202,7 +202,7 @@ export default function CommercialPage() {
         <div className="container-custom">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="inline-block text-accent font-medium text-sm uppercase tracking-wider mb-4">
-              Why Choose Eco Elan
+              Why Choose eco-elan
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
               Why Businesses Choose Us

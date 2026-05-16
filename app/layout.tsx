@@ -21,8 +21,8 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL("https://eco-elan.ca"),
   title: {
-    default: "Eco-Elan | Premium Eco-Friendly Cleaning in Ontario",
-    template: "%s | Eco-Elan",
+    default: "eco-elan | Premium Eco-Friendly Cleaning in Ontario",
+    template: "%s | eco-elan",
   },
   description:
     "Professional eco-friendly cleaning and lawn care services across Ontario. Safe for your family, gentle on the earth.",
@@ -30,21 +30,21 @@ export const metadata: Metadata = {
     "eco cleaning Ontario",
     "green cleaning Toronto",
     "eco-friendly lawn care Ontario",
-    "Eco-Elan",
+    "eco-elan",
     "non-toxic cleaning Ontario",
   ],
   openGraph: {
-    title: "Eco-Elan | Premium Eco-Friendly Cleaning in Ontario",
+    title: "eco-elan | Premium Eco-Friendly Cleaning in Ontario",
     description:
       "Professional eco-friendly cleaning and lawn care services across Ontario.",
     url: "https://eco-elan.ca",
-    siteName: "Eco-Elan",
+    siteName: "eco-elan",
     images: [
       {
         url: "/assets/hero-home.webp",
         width: 1200,
         height: 630,
-        alt: "Eco-Elan eco-friendly cleaning service",
+        alt: "eco-elan eco-friendly cleaning service",
       },
     ],
     locale: "en_CA",

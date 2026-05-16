@@ -55,15 +55,15 @@ async function sendBookingEmails(booking: Booking): Promise<{ ok: boolean }> {
   }
 
   try {
-    const adminEmail = process.env.ADMIN_EMAIL || "info@ecoelan.com";
+    const adminEmail = process.env.ADMIN_EMAIL || "info@eco-elan.com";
     const date = booking.preferredDate || "To be scheduled";
     const message = booking.message || "No message provided.";
 
     const { data, error } = await resend.emails.send({
-      from: "Eco-Elan Bookings <onboarding@resend.dev>",
+      from: "eco-elan Bookings <onboarding@resend.dev>",
       to: [adminEmail],
       replyTo: booking.email,
-      subject: `New Eco-Elan booking request - ${booking.service}`,
+      subject: `New eco-elan booking request - ${booking.service}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 640px; color: #1a1a1a;">
           <h1 style="color: #2d6a4f;">New booking request</h1>

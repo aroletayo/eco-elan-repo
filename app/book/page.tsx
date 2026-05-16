@@ -16,7 +16,7 @@ export default function BookPage() {
       <section className="relative overflow-hidden bg-[#081c15] px-4 py-20 text-white sm:px-6 lg:px-8">
         <Image
           src="/assets/cleaning-kitchen.webp"
-          alt="Book Eco Elan cleaning"
+          alt="Book eco-elan cleaning"
           fill
           priority
           className="object-cover opacity-24"
@@ -48,7 +48,7 @@ export default function BookPage() {
           <div className="rounded-lg border border-[#e9c46a]/25 bg-[linear-gradient(145deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06))] p-5 shadow-[0_34px_90px_rgba(0,0,0,0.34)] backdrop-blur-xl md:p-8">
             <div className="mb-6 border-b border-white/10 pb-5">
               <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#e9c46a]">
-                Eco-Elan concierge
+                eco-elan concierge
               </p>
               <h2 className="brand-wordmark mt-2 text-4xl font-bold italic text-white">
                 Tell us what you need

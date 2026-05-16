@@ -66,7 +66,7 @@ export default function ServicesPage() {
       <section className="relative overflow-hidden bg-[#081c15] px-4 py-24 text-white sm:px-6 lg:px-8">
         <Image
           src="/assets/Ecoelan-services.webp"
-          alt="Eco Elan services"
+          alt="eco-elan services"
           fill
           priority
           className="object-cover opacity-22"
@@ -83,7 +83,7 @@ export default function ServicesPage() {
           </div>
           <p className="max-w-2xl text-lg leading-8 text-white/74">
             From regular maintenance to deep cleaning, lawn care, commercial
-            spaces, and windows, Eco Elan brings modern eco luxury to every
+            spaces, and windows, eco-elan brings modern eco luxury to every
             service across Ontario.
           </p>
         </div>

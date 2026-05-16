@@ -25,13 +25,13 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-3">
               <Image
                 src="/Ecoelan-logo-removebg.webp"
-                alt="Eco Elan"
+                alt="eco-elan"
                 width={96}
                 height={96}
                 className="h-20 w-20 object-contain"
               />
               <span className="brand-wordmark text-4xl font-bold italic">
-                Eco-Elan
+                eco-elan
               </span>
             </Link>
             <p className="max-w-xs text-sm leading-6 text-white/68">
@@ -44,7 +44,7 @@ export function Footer() {
                   key={index}
                   href={index === 0 ? "https://instagram.com/ecoelancleaning" : "#"}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/75 transition hover:border-[#74c69d] hover:text-[#74c69d]"
-                  aria-label="Eco-Elan social link"
+                  aria-label="eco-elan social link"
                 >
                   <Icon className="h-5 w-5" />
                 </a>
@@ -99,7 +99,7 @@ export function Footer() {
               </li>
               <li className="flex gap-3">
                 <Mail className="mt-0.5 h-5 w-5 text-[#74c69d]" />
-                <a href="mailto:info@ecoelan.com">info@ecoelan.com</a>
+                <a href="mailto:info@eco-elan.com">info@eco-elan.com</a>
               </li>
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 text-[#74c69d]" />
@@ -110,7 +110,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Eco-Elan. All rights reserved.</p>
+          <p>© 2026 eco-elan. All rights reserved.</p>
           <p>eco-elan.ca</p>
         </div>
       </div>

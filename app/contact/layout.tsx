@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact Eco Elan for eco-friendly cleaning and lawn care services in Ontario. Call +1(437) 2654977 or email info@ecoelan.com.",
+    "Contact eco-elan for eco-friendly cleaning and lawn care services in Ontario. Call +1(437) 2654977 or email info@eco-elan.com.",
   openGraph: {
-    title: "Contact Eco Elan",
+    title: "Contact eco-elan",
     description: "Book premium eco-friendly cleaning across Ontario.",
     images: ["/assets/hero-home.webp"],
   },

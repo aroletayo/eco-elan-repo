@@ -7,7 +7,7 @@ const resend = resendKey
   : null;
 
 export async function POST(request: Request) {
-  console.log("📧 Eco Elan Booking Confirmation API called");
+  console.log("📧 eco-elan Booking Confirmation API called");
 
   try {
     // Check if Resend is configured
@@ -68,16 +68,16 @@ export async function POST(request: Request) {
     }
 
     const { data: emailData, error } = await resend.emails.send({
-      from: "Eco Elan <onboarding@resend.dev>", // Change this to your verified domain
+      from: "eco-elan <onboarding@resend.dev>", // Change this to your verified domain
       to: [email],
-      bcc: process.env.ADMIN_EMAIL || "info@ecoelan.com",
+      bcc: process.env.ADMIN_EMAIL || "info@eco-elan.com",
       subject: `Booking Confirmed – Order #${displayOrderId} 🌿`,
       html: `
         <div style="font-family: 'Arial', 'Helvetica', sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 30px; border-radius: 16px;">
           <!-- Header -->
           <div style="text-align: center; margin-bottom: 30px;">
             <h1 style="color: #166534; font-size: 28px; margin-bottom: 10px;">
-              🌿 Eco Elan Cleaning
+              🌿 eco-elan Cleaning
             </h1>
             <p style="color: #6b7280;">Eco-Friendly Professional Cleaning Services</p>
           </div>
@@ -176,7 +176,7 @@ export async function POST(request: Request) {
           <div style="background-color: #ffffff; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
             <h3 style="color: #14532d; margin-top: 0;">📞 Need to Make Changes?</h3>
             <p style="color: #374151; margin-bottom: 20px;">
-              Contact us at <strong>info@ecoelan.com</strong> or call <strong>+1(437) 2654977</strong>
+              Contact us at <strong>info@eco-elan.com</strong> or call <strong>+1(437) 2654977</strong>
             </p>
             <p style="color: #6b7280; font-size: 14px;">
               This is an automated confirmation. Please do not reply directly to this email.
@@ -185,7 +185,7 @@ export async function POST(request: Request) {
 
           <!-- Footer -->
           <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #9ca3af; font-size: 12px;">
-            <p>© ${new Date().getFullYear()} Eco Elan Cleaning. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} eco-elan Cleaning. All rights reserved.</p>
             <p>100% Eco-Friendly • Licensed & Insured • Satisfaction Guaranteed</p>
           </div>
         </div>

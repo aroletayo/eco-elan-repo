@@ -61,7 +61,7 @@ const defaultContent: ContentData = {
     airbnbDescription: 'Fast, consistent turnover service for rentals',
   },
   about: {
-    title: 'About Eco Elan',
+    title: 'About eco-elan',
     description: 'We are a team of professional cleaners dedicated to providing eco-friendly cleaning services.',
     mission: 'Our mission is to provide exceptional cleaning while protecting the environment.',
   },
