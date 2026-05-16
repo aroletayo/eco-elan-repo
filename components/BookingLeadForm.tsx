@@ -18,6 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { generateOrderId } from "@/lib/order-id";
 
+const fieldClassName =
+  "border-white/20 bg-white text-[#081c15] placeholder:text-[#081c15]/45 focus-visible:ring-[#e9c46a]";
+
 const serviceTypes = [
   {
     name: "Regular House Cleaning",
@@ -157,6 +160,7 @@ export function BookingLeadForm() {
           placeholder="Name"
           value={formData.name}
           onChange={(event) => updateField("name", event.target.value)}
+          className={fieldClassName}
         />
         <Input
           required
@@ -164,6 +168,7 @@ export function BookingLeadForm() {
           placeholder="Email"
           value={formData.email}
           onChange={(event) => updateField("email", event.target.value)}
+          className={fieldClassName}
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2">
@@ -173,24 +178,27 @@ export function BookingLeadForm() {
           placeholder="Phone"
           value={formData.phone}
           onChange={(event) => updateField("phone", event.target.value)}
+          className={fieldClassName}
         />
         <Input
           readOnly
           required
           value={formData.service}
           placeholder="Select a service above"
-          className="cursor-default"
+          className={`${fieldClassName} cursor-default`}
         />
       </div>
       <Input
         type="date"
         value={formData.preferredDate}
         onChange={(event) => updateField("preferredDate", event.target.value)}
+        className={fieldClassName}
       />
       <Textarea
         placeholder="Message"
         value={formData.message}
         onChange={(event) => updateField("message", event.target.value)}
+        className={`${fieldClassName} min-h-28`}
       />
       <Button
         type="submit"
