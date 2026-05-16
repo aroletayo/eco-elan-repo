@@ -28,6 +28,8 @@ const aboutContent = {
     "Our mission is to provide exceptional cleaning while protecting the environment.",
 };
 
+const heroAbout = "/assets/Ecoelan-teams.webp";
+
 const values = [
   {
     icon: Leaf,
@@ -85,19 +87,32 @@ export default function AboutPage() {
     <PageTransition>
       <div className="flex flex-col">
         {/* Hero Section */}
-        <section className="section-padding bg-[#081c15]">
-          <div className="container-custom">
-            <FadeIn className="max-w-3xl mx-auto text-center">
-              <span className="mb-5 inline-block rounded-full border border-[#74c69d]/35 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#e9c46a]">
-                Our Story
-              </span>
-              <h1 className="p-5 font-display text-5xl md:text-6xl font-bold text-white mb-6">
-                {aboutContent.title}
+        <section className="relative min-h-[100vh] md:min-h-[70vh] flex items-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              src={heroAbout}
+              alt="eco-elan cleaning team"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/50" />
+          </div>
+
+          <div className="p-5 container-custom relative z-10">
+            <FadeIn className="max-w-5xl">
+              <h1 className="font-display text-[3rem] md:text-[70px] font-bold text-primary leading-tight mb-6">
+                About <span className="text-accent">eco-elan</span>
               </h1>
 
-              <p className="text-white/75 text-lg md:text-xl leading-relaxed">
+              <p className="text-lg max-w-xl md:text-xl text-muted-foreground mb-8 leading-relaxed">
                 {aboutContent.description}
               </p>
+
+              <Button className="min-w-[250px]" variant="hero" size="lg" asChild>
+                <Link href="/book">
+                  Book Your Clean
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
             </FadeIn>
           </div>
         </section>
@@ -287,7 +302,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section-padding bg-[#081c15]">
+        <section className="section-padding bg-primary">
           <div className="container-custom text-center">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
               Ready to Experience eco-elan?

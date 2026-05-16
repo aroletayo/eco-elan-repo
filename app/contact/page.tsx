@@ -23,6 +23,8 @@ const contactContent = {
   address: "Ontario, Canada",
 };
 
+const heroContact = "/assets/cleaning-livingroom.webp";
+
 const serviceOptions = [
   "Standard Eco Cleaning",
   "Deep Eco Cleaning",
@@ -71,25 +73,43 @@ const ContactPage = () => {
     <PageTransition>
       <div className="flex flex-col">
         {/* Hero Section */}
-        <section className="section-padding bg-[#081c15]">
-          <div className="container-custom text-center">
-            <FadeIn>
-              <span className="mb-5 inline-block rounded-full border border-[#74c69d]/35 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#e9c46a]">
-                We are here to help
-              </span>
-              <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
-                {contactContent.title}
+        <section className="relative min-h-[100vh] md:min-h-[70vh] flex items-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              src={heroContact}
+              alt="Clean eco-friendly living room"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/50" />
+          </div>
+
+          <div className="p-5 container-custom relative z-10">
+            <FadeIn className="max-w-5xl">
+              <h1 className="font-display text-[3rem] md:text-[70px] font-bold text-primary leading-tight mb-6">
+                Contact <span className="text-accent">eco-elan</span>
               </h1>
 
-              <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto">
+              <p className="text-lg max-w-xl md:text-xl text-muted-foreground mb-8 leading-relaxed">
                 {contactContent.subtitle}
               </p>
+
+              <Button
+                className="min-w-[250px] group"
+                variant="hero"
+                size="lg"
+                asChild
+              >
+                <a href={`tel:${contactContent.phone}`}>
+                  <Phone className="w-5 h-5 mr-2" />
+                  Call Us
+                </a>
+              </Button>
             </FadeIn>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section className="section-padding -mt-8">
+        <section className="section-padding bg-secondary">
           <div className="container-custom">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Contact Info */}
